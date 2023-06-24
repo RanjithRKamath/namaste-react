@@ -1,26 +1,65 @@
 import RestaurantCard from "./RestaurantCard";
-import { resList } from "../utils/mokcData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Shimmer } from "./Shimmer";
 
 const Body = () => {
-  const [restaurants, setRestaurants]=useState(resList);
+  const [restaurants, setRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
 
-  return (
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.906497&lng=74.855362&offset=15&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING"
+    );
+    const parsedData = await data.json();
+    setRestaurants(parsedData?.data?.cards);
+    setFilteredRestaurants(parsedData?.data?.cards);
+  };
+
+  if (restaurants.length === 0) {
+    return <Shimmer />;
+  }
+
+  return restaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="search">
-        <input type="text" className="text-box"></input>
+        <input
+          type="text"
+          value={searchParam}
+          onChange={(e) => setSearchParam(e.target.value)}
+        ></input>
         <input
           type="button"
           value="Submit"
-          onClick={()=>{
-            updatedRestaurants=restaurants.filter((res)=>res.data.data.avgRating>4)
-            setRestaurants(updatedRestaurants)
-            }
-          }
+          onClick={() => {
+            const filteredRestaurant = restaurants.filter((res) =>
+              res.data.data.name
+                .toLowerCase()
+                .includes(searchParam.toLowerCase())
+            );
+            setFilteredRestaurants(filteredRestaurant);
+          }}
+        ></input>
+        <input
+          type="button"
+          value="Top Rated Restaurant"
+          className="top-res"
+          onClick={() => {
+            updatedRestaurants = restaurants.filter(
+              (res) => res.data.data.avgRating > 4
+            );
+            setFilteredRestaurants(updatedRestaurants);
+          }}
         ></input>
       </div>
       <div className="restaurantContainer">
-        {restaurants.map((restaurant) => (
+        {filteredRestaurants.map((restaurant) => (
           <RestaurantCard resData={restaurant} key={restaurant.data.data.id} />
         ))}
       </div>

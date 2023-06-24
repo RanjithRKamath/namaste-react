@@ -1,47 +1,69 @@
-
-.Header{
+.Header {
     display: flex;
     justify-content: space-between;
     border: 1px solid black;
 }
 
-.logo{
+.logo {
     width: 150px;
     justify-content: left;
 }
 
-.nav-items>ul{
+.nav-items>ul {
     display: flex;
     list-style-type: none;
     font-size: 18px;
 }
 
-.nav-items > ul>li{
+.nav-items>ul>li {
     padding: 10px;
     margin: 10px;
 }
 
-.body{
+.body {
     justify-content: center;
 }
 
-.res-image{
+.res-image {
     width: 100%;
 }
 
-.res-card{
+.res-card {
     width: 200px;
     padding: 5px;
     margin: 5px;
 }
 
-.res-card:hover{
+.res-card:hover {
     cursor: pointer;
     border: 1px solid black;
     background-color: rgb(236, 245, 236);
 }
 
-.restaurantContainer{
+.restaurantContainer {
     display: flex;
     flex-wrap: wrap;
+}
+
+.shimmer {
+    width: 200px;
+    height: 350px;
+    background-color: rgb(215, 218, 218);
+    margin: 10px;
+    padding: 10px;
+}
+
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top-res {
+    margin: 5px;
+    padding: 5px;
+}
+
+.search {
+    margin: 5px;
+    padding: 5px;
 }
