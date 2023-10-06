@@ -17,8 +17,8 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.906497&lng=74.855362&offset=15&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING"
     );
     const parsedData = await data.json();
-    setRestaurants(parsedData?.data?.cards);
-    setFilteredRestaurants(parsedData?.data?.cards);
+    setRestaurants(parsedData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurants(parsedData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
   if (restaurants.length === 0) {
@@ -40,7 +40,7 @@ const Body = () => {
           value="Submit"
           onClick={() => {
             const filteredRestaurant = restaurants.filter((res) =>
-              res.data.data.name
+              res.info.name
                 .toLowerCase()
                 .includes(searchParam.toLowerCase())
             );
@@ -53,7 +53,7 @@ const Body = () => {
           className="top-res"
           onClick={() => {
             updatedRestaurants = restaurants.filter(
-              (res) => res.data.data.avgRating > 4
+              (res) => res.info.avgRating > 4
             );
             setFilteredRestaurants(updatedRestaurants);
           }}
@@ -62,12 +62,12 @@ const Body = () => {
       <div className="restaurantContainer">
         {filteredRestaurants.map((restaurant) => (
           <Link
-            to={"/restaurant/" + restaurant.data.data.id}
-            key={restaurant.data.data.id}
+            to={"/restaurant/" + restaurant.info.id}
+            key={restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            <RestaurantCard resData={restaurant?.info} />
           </Link>
-        ))}
+  ))}
       </div>
     </div>
   );
