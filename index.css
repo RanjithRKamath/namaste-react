@@ -67,3 +67,9 @@
     margin: 5px;
     padding: 5px;
 }
+
+.user-data{
+    padding: 5px;
+    margin: 5px;
+    border: solid black;
+}
