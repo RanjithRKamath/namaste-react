@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const User =(props)=>{
     const {name, location}=props;
     const [count, setCount]=useState(0);
+
     useEffect(()=>{
         const a=setInterval(()=>{
             console.log("Interval");
