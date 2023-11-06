@@ -36,13 +36,15 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="search">
+      <div className="p-1 m-1">
         <input
+          className="border border-black"
           type="text"
           value={searchParam}
           onChange={(e) => setSearchParam(e.target.value)}
         ></input>
         <input
+          className="bg-green-100 px-2 m-2 rounded-lg"
           type="button"
           value="Submit"
           onClick={() => {
@@ -55,9 +57,9 @@ const Body = () => {
           }}
         ></input>
         <input
+          className="bg-green-100 px-2 rounded-lg"
           type="button"
           value="Top Rated Restaurant"
-          className="top-res"
           onClick={() => {
             updatedRestaurants = restaurants.filter(
               (res) => res.info.avgRating > 4
@@ -66,7 +68,7 @@ const Body = () => {
           }}
         ></input>
       </div>
-      <div className="restaurantContainer">
+      <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (
           <Link
             to={"/restaurant/" + restaurant.info.id}

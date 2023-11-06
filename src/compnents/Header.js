@@ -5,31 +5,30 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Header = () => {
   const [loginBtn, setloginBtn] = useState("Login");
-  const [dummy, setDummy] = useState("abc");
   const onlineStatus=useOnlineStatus();
   return (
-    <div className="Header">
+    <div className="flex justify-between shadow-lg mb-2 border border-black">
       <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+        <img className="w-28" src={LOGO_URL} />
       </div>
-      <div className="nav-items">
-        <ul>
-          <li>
+      <div className="flex items-center">
+        <ul className="flex m-4 p-4">
+          <li className="px-4">
             Online Status: {onlineStatus?"✅":"⛔"}
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/contact">Contact</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/aboutus">About US</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li>Cart</li>
+          <li className="px-4">Cart</li>
           <input
             type="button"
             value={loginBtn}
@@ -38,13 +37,6 @@ export const Header = () => {
                 ? setloginBtn("Logout")
                 : setloginBtn("Login")
             }
-          ></input>
-          <input
-            type="button"
-            value={dummy}
-            onClick={() => {
-              setDummy("xyz");
-            }}
           ></input>
         </ul>
       </div>
