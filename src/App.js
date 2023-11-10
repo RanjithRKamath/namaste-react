@@ -1,4 +1,5 @@
-import React, {Suspense, lazy} from "react";
+import UserContext from "./utils/UserContext";
+import React, {Suspense, lazy, useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import { Header } from "./compnents/Header";
 import Body from "./compnents/Body";
@@ -10,10 +11,21 @@ import RestaurantMenu from "./compnents/RestaurantMenu";
 
 
 const Applayout = () => {
+  const [username, setUserName]=useState();
+  useEffect(()=>{
+    /*make an API call*/
+    const data={
+      name: "Ranjith R Kamath",
+    }
+    setUserName(data.name);
+  }, []);
+
   return (
     <div>
-      <Header />
-      <Outlet />
+      <UserContext.Provider value={{loggedInUser: username, setUserName }}>
+        <Header />
+        <Outlet />
+      </UserContext.Provider>
     </div>
   );
 };

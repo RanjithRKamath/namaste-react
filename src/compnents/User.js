@@ -6,7 +6,6 @@ const User =(props)=>{
 
     useEffect(()=>{
         const a=setInterval(()=>{
-            console.log("Interval");
         },1000);
         return(()=>{
             clearInterval(a);
