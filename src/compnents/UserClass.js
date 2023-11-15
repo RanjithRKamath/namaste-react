@@ -30,8 +30,4 @@ class UserClass extends React.Component{
     };
 }
 
-<<<<<<< HEAD
 export default UserClass;
-=======
-export default UserClass;
->>>>>>> c60d02a88aa5e012947592f35d1ea0f2b0119c5d
